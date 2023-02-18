@@ -82,7 +82,7 @@ export default function Account({ session }: { session: Session }) {
   return (
     <div className="form-widget">
       <Avatar
-        uid={user.id}
+        uid={user!.id}
         url={avatar_url}
         size={150}
         onUpload={(url) => {
