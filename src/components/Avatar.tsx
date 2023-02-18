@@ -76,12 +76,14 @@ export default function Avatar({
         <Image
           src={avatarUrl}
           alt="Avatar"
-          className="avatar image"
+          height={size}
+          width={size}
+          className="max-w-full overflow-hidden rounded-full object-cover"
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="avatar no-image"
+          className="max-w-full overflow-hidden rounded-full border-2 border-solid border-gray-700 bg-gray-500"
           style={{ height: size, width: size }}
         />
       )}
