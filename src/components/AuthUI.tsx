@@ -15,7 +15,7 @@ export default function AuthUI() {
             appearance={{
               theme: ThemeMinimal,
               className: {
-                container: 'm-2 p-4 rounded bg-gray-500',
+                container: 'm-2 p-4 rounded-lg bg-gray-500',
               },
               style: {},
             }}
