@@ -7,52 +7,62 @@ export default function AuthUI() {
   const supabase = useSupabaseClient()
 
   return (
-    <div className="">
-      <div className="container mx-4 w-full pt-8 sm:mx-auto sm:w-1/2 sm:pt-32">
-        {!session ? (
-          <SupabaseAuthUI
-            supabaseClient={supabase}
-            appearance={{
-              theme: ThemeMinimal,
-              className: {
-                container: 'm-2 p-4 rounded-lg bg-gray-500',
+    <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/10 p-4 shadow-lg backdrop-blur-lg">
+      {!session ? (
+        <SupabaseAuthUI
+          supabaseClient={supabase}
+          appearance={{
+            theme: ThemeMinimal,
+            className: {},
+            style: {
+              label: {
+                color: 'gray',
+                fontSize: '1rem',
               },
-              style: {},
-            }}
-            localization={{
-              lang: 'ja',
-              variables: {
-                sign_in: {
-                  email_label: 'メールアドレス',
-                  email_input_placeholder: 'example@smoke.com',
-                  password_label: 'パスワード',
-                  password_input_placeholder: 'Password',
-                  button_label: 'サインイン',
-                  loading_button_label: 'ロード中...',
-                  link_text: 'アカウントを既にお持ちですか？サインイン',
-                },
-                sign_up: {
-                  email_label: 'メールアドレス',
-                  email_input_placeholder: 'example@smoke.com',
-                  password_label: 'パスワード',
-                  password_input_placeholder: 'Password',
-                  button_label: 'サインアップ',
-                  loading_button_label: 'ロード中...',
-                  link_text: 'アカウントをお持ちではありませんか？サインアップ',
-                },
-                forgotten_password: {
-                  email_label: 'メールアドレス',
-                  email_input_placeholder: 'example@smoke.com',
-                  button_label: '送信する',
-                  link_text: 'パスワードを忘れた',
-                },
+              button: {
+                margin: 'auto',
+                width: '50%',
+                color: '',
+                background: 'rgb(99,102,241)',
+                border: '1px',
+                borderRadius: '0.375rem',
+                boxShadow: '0 10px 8px rgb(0 0 0 / 0.04)',
               },
-            }}
-          />
-        ) : (
-          <Account session={session} />
-        )}
-      </div>
+            },
+          }}
+          localization={{
+            lang: 'ja',
+            variables: {
+              sign_in: {
+                email_label: 'メールアドレス',
+                email_input_placeholder: 'example@smoke.com',
+                password_label: 'パスワード',
+                password_input_placeholder: 'Password',
+                button_label: 'サインイン',
+                loading_button_label: 'ロード中...',
+                link_text: 'アカウントを既にお持ちですか？サインイン',
+              },
+              sign_up: {
+                email_label: 'メールアドレス',
+                email_input_placeholder: 'example@smoke.com',
+                password_label: 'パスワード',
+                password_input_placeholder: 'Password',
+                button_label: 'サインアップ',
+                loading_button_label: 'ロード中...',
+                link_text: 'アカウントをお持ちではありませんか？サインアップ',
+              },
+              forgotten_password: {
+                email_label: 'メールアドレス',
+                email_input_placeholder: 'example@smoke.com',
+                button_label: '送信する',
+                link_text: 'パスワードを忘れた',
+              },
+            },
+          }}
+        />
+      ) : (
+        <Account session={session} />
+      )}
     </div>
   )
 }
