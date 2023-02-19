@@ -18,12 +18,15 @@ export default function Account({ session }: { session: Session }) {
 
   useEffect(() => {
     getProfile()
+    console.log('更新')
   }, [session])
 
   async function getProfile() {
     try {
       setLoading(true)
       if (!user) throw new Error('No user')
+
+      console.log('get profile ...')
 
       let { data, error, status } = await supabase
         .from('profiles')
@@ -60,6 +63,8 @@ export default function Account({ session }: { session: Session }) {
       setLoading(true)
       if (!user) throw new Error('No user')
 
+      console.log('profile update ...')
+
       const updates = {
         id: user.id,
         username,
@@ -80,7 +85,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="container bg-gray-100">
       <Avatar
         uid={user!.id}
         url={avatar_url}
@@ -93,11 +98,18 @@ export default function Account({ session }: { session: Session }) {
       {/* ... */}
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <input
+          className="bg-gray-300"
+          id="email"
+          type="text"
+          value={session.user.email}
+          disabled
+        />
       </div>
       <div>
         <label htmlFor="username">Username</label>
         <input
+          className="bg-gray-300"
           id="username"
           type="text"
           value={username || ''}
@@ -107,6 +119,7 @@ export default function Account({ session }: { session: Session }) {
       <div>
         <label htmlFor="website">Website</label>
         <input
+          className="bg-gray-300"
           id="website"
           type="text"
           value={website || ''}
@@ -116,16 +129,18 @@ export default function Account({ session }: { session: Session }) {
 
       <div>
         <button
-          className=""
+          className="bg-gray-500 text-gray-50"
           onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled
         >
           {loading ? 'Loading ...' : 'Update'}
         </button>
       </div>
 
       <div>
-        <button className="" onClick={() => supabase.auth.signOut()}>
+        <button
+          className="bg-gray-800 text-gray-100"
+          onClick={() => supabase.auth.signOut()}
+        >
           Sign Out
         </button>
       </div>

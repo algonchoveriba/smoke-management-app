@@ -21,10 +21,12 @@ export default function Avatar({
 
   useEffect(() => {
     if (url) downloadImage(url)
+    console.log(url)
   }, [url])
 
   async function downloadImage(path: string) {
     try {
+      console.log('downloading image ...')
       const { data, error } = await supabase.storage
         .from('avatars')
         .download(path)
@@ -43,6 +45,8 @@ export default function Avatar({
   ) => {
     try {
       setUploading(true)
+
+      console.log('uploading image ...')
 
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error('You must select an image to upload.')
