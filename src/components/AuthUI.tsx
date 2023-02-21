@@ -16,17 +16,38 @@ export default function AuthUI() {
             className: {},
             style: {
               label: {
-                color: 'gray',
+                color: 'whitesmoke',
                 fontSize: '1rem',
+                textShadow: '0 2px 5px rgba(0 0 0 / .2)',
+              },
+              input: {
+                paddingLeft: '1rem',
+                color: 'whitesmoke',
+                borderRadius: '0.125rem',
+                borderWidth: '.5px',
+                borderColor: 'rgb(229 231 235 / 0.3)',
+                backgroundColor: 'rgb(229 231 235 / .1)',
+                textShadow: '0 2px 5px rgba(0 0 0 / .1)',
+                boxShadow: '0 2px 10px rgba(0 0 0 / .3);',
               },
               button: {
                 margin: 'auto',
-                width: '50%',
-                color: '',
-                background: 'rgb(99,102,241)',
+                width: '40%',
+                color: 'whitesmoke',
+                background: 'rgba(99 102 241 / .8)',
                 border: '1px',
                 borderRadius: '0.375rem',
-                boxShadow: '0 10px 8px rgb(0 0 0 / 0.04)',
+                textShadow: '0 2px 5px rgba(0 0 0 / .3)',
+                boxShadow: '0 2px 5px rgba(0 0 0 / .3)',
+              },
+              anchor: {
+                color: 'darkgray',
+                textDecoration: 'underline',
+                fontSize: '0.95rem',
+              },
+              message: {
+                color: 'orangered',
+                textShadow: '0 2px 5px rgba(0 0 0 / .3)',
               },
             },
           }}

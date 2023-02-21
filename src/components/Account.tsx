@@ -85,7 +85,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 shadow-lg backdrop-blur-lg">
+    <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 font-noto shadow-lg backdrop-blur-lg">
       <Avatar
         uid={user!.id}
         url={avatar_url}
