@@ -1,8 +1,8 @@
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Auth as SupabaseAuthUI, ThemeMinimal } from '@supabase/auth-ui-react'
-import Account from './Account'
+import { Account } from './Account'
 
-export default function AuthUI() {
+export const AuthUI = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
 

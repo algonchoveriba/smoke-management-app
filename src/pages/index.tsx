@@ -1,6 +1,7 @@
-import AuthUI from '@/components/AuthUI'
+import { AuthUI } from '@/components/AuthUI'
+import type { NextPage } from 'next'
 
-const Home = () => {
+const Home: NextPage = () => {
   return (
     <div>
       <AuthUI />

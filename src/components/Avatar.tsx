@@ -4,7 +4,7 @@ import { Database } from 'schema'
 import Image from 'next/image'
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
-export default function Avatar({
+export const Avatar = ({
   uid,
   url,
   size,
@@ -14,7 +14,7 @@ export default function Avatar({
   url: Profiles['avatar_url']
   size: number
   onUpload: (url: string) => void
-}) {
+}) => {
   const supabase = useSupabaseClient<Database>()
   const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null)
   const [uploading, setUploading] = useState(false)

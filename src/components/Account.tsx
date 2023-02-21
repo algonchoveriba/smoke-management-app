@@ -5,10 +5,10 @@ import {
   Session,
 } from '@supabase/auth-helpers-react'
 import { Database } from 'schema'
-import Avatar from './Avatar'
+import { Avatar } from './Avatar'
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
-export default function Account({ session }: { session: Session }) {
+export const Account = ({ session }: { session: Session }) => {
   const supabase = useSupabaseClient<Database>()
   const user = useUser()
   const [loading, setLoading] = useState(true)
@@ -85,7 +85,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 font-noto shadow-lg backdrop-blur-lg">
+    <div className="font-noto h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 shadow-lg backdrop-blur-lg">
       <Avatar
         uid={user!.id}
         url={avatar_url}
