@@ -13,7 +13,6 @@ export const Account = ({ session }: { session: Session }) => {
   const user = useUser()
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState<Profiles['username']>(null)
-  const [website, setWebsite] = useState<Profiles['website']>(null)
   const [avatar_url, setAvatar_url] = useState<Profiles['avatar_url']>(null)
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export const Account = ({ session }: { session: Session }) => {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select('username, website, avatar_url')
+        .select('username, avatar_url')
         .eq('id', user.id)
         .single()
 
@@ -40,7 +39,6 @@ export const Account = ({ session }: { session: Session }) => {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
         setAvatar_url(data.avatar_url)
       }
     } catch (error) {
@@ -52,11 +50,9 @@ export const Account = ({ session }: { session: Session }) => {
   }
   async function updateProfile({
     username,
-    website,
     avatar_url,
   }: {
     username: Profiles['username']
-    website: Profiles['website']
     avatar_url: Profiles['avatar_url']
   }) {
     try {
@@ -68,7 +64,6 @@ export const Account = ({ session }: { session: Session }) => {
       const updates = {
         id: user.id,
         username,
-        website,
         avatar_url,
         updated_at: new Date().toISOString(),
       }
@@ -85,52 +80,48 @@ export const Account = ({ session }: { session: Session }) => {
   }
 
   return (
-    <div className="font-noto h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 shadow-lg backdrop-blur-lg">
+    <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 p-4 shadow-lg backdrop-blur-lg">
       <Avatar
         uid={user!.id}
         url={avatar_url}
         size={150}
         onUpload={(url) => {
           setAvatar_url(url)
-          updateProfile({ username, website, avatar_url: url })
+          updateProfile({ username, avatar_url: url })
         }}
       />
       {/* ... */}
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          className="bg-gray-300"
-          id="email"
-          type="text"
-          value={session.user.email}
-          disabled
-        />
-      </div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          className="bg-gray-300"
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          className="bg-gray-300"
-          id="website"
-          type="text"
-          value={website || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <div className="">
+        <div className="flex flex-col">
+          <label className="mt-1 px-1 text-gray-100" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="rounded-sm border border-gray-200/30 bg-gray-200/10 px-1 text-gray-100 shadow-sm"
+            id="email"
+            type="text"
+            value={session.user.email}
+            disabled
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="mt-1 px-1 text-gray-100" htmlFor="username">
+            Username
+          </label>
+          <input
+            className="rounded-sm border border-gray-200/30 bg-gray-200/10 px-1 text-gray-100 shadow-sm"
+            id="username"
+            type="text"
+            value={username || ''}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div>
+      <div className="mx-auto">
         <button
-          className="bg-gray-500 text-gray-50"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          className="my-2 w-32 rounded-full bg-indigo-500/80 px-2 text-gray-100"
+          onClick={() => updateProfile({ username, avatar_url })}
         >
           {loading ? 'Loading ...' : 'Update'}
         </button>
@@ -138,7 +129,7 @@ export const Account = ({ session }: { session: Session }) => {
 
       <div>
         <button
-          className="bg-gray-800 text-gray-100"
+          className="my-2 w-28 rounded-full bg-gray-500/80 px-2 text-gray-100"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out

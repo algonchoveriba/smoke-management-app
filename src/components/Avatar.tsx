@@ -75,24 +75,27 @@ export const Avatar = ({
   }
 
   return (
-    <div>
+    <div className="">
       {avatarUrl ? (
         <Image
           src={avatarUrl}
           alt="Avatar"
           height={size}
           width={size}
-          className="max-w-full overflow-hidden rounded-full object-cover"
+          className="mx-auto max-w-full overflow-hidden rounded-full object-cover shadow-md backdrop-blur-md"
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="max-w-full overflow-hidden rounded-full border-2 border-solid border-gray-700 bg-gray-500"
+          className="mx-auto  max-w-full overflow-hidden rounded-full border border-gray-200/30 bg-gray-200/10 shadow-md backdrop-blur-md"
           style={{ height: size, width: size }}
         />
       )}
-      <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
+      <div className="" style={{ width: size }}>
+        <label
+          className="m-1 rounded-full border border-indigo-500/80 bg-indigo-500/80 py-1 px-2 text-gray-100 shadow-md backdrop-blur-md"
+          htmlFor="single"
+        >
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
         <input
