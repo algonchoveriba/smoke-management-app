@@ -34,30 +34,70 @@ export interface Database {
   }
   public: {
     Tables: {
+      counters: {
+        Row: {
+          created_at: string | null
+          id: number
+          kind: string | null
+          number: number | null
+          u_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          kind?: string | null
+          number?: number | null
+          u_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          kind?: string | null
+          number?: number | null
+          u_id?: string
+        }
+      }
+      kinds: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string | null
+          price: number | null
+          u_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          name?: string | null
+          price?: number | null
+          u_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string | null
+          price?: number | null
+          u_id?: string
+        }
+      }
       profiles: {
         Row: {
           avatar_url: string | null
-          full_name: string | null
           id: string
           updated_at: string | null
           username: string | null
-          website: string | null
         }
         Insert: {
           avatar_url?: string | null
-          full_name?: string | null
-          id: string
-          updated_at?: string | null
-          username?: string | null
-          website?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          full_name?: string | null
           id?: string
           updated_at?: string | null
           username?: string | null
-          website?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string | null
         }
       }
     }
