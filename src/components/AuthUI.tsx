@@ -1,12 +1,10 @@
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Auth as SupabaseAuthUI, ThemeMinimal } from '@supabase/auth-ui-react'
-import { useRouter } from 'next/router'
-import { Account } from './Account'
+import { Dashboard } from './Dashboard'
 
 export const AuthUI = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
-  const router = useRouter()
 
   return (
     <>
@@ -81,7 +79,7 @@ export const AuthUI = () => {
           />
         </div>
       ) : (
-        <Account session={session} />
+        <Dashboard session={session} />
       )}
     </>
   )
