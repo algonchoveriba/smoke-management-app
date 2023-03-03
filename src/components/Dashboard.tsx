@@ -1,6 +1,5 @@
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 import { Session } from '@supabase/supabase-js'
-import { count } from 'console'
 
 import { useEffect, useState } from 'react'
 import { Database } from 'schema'
@@ -18,6 +17,7 @@ export const Dashboard = ({ session }: { session: Session }) => {
 
   useEffect(() => {
     getCounters()
+    console.log('ダッシュボード更新')
   }, [session])
 
   async function getCounters() {
@@ -58,7 +58,7 @@ export const Dashboard = ({ session }: { session: Session }) => {
       setLoading(true)
       if (!user) throw new Error('No user')
 
-      console.log('counter recording ...')
+      console.log('counter adding ...')
 
       const adds = {
         u_id: user.id,
@@ -110,6 +110,7 @@ export const Dashboard = ({ session }: { session: Session }) => {
       <button onClick={() => addCounter({ number, kind })}>
         {loading ? 'loading...' : 'update'}
       </button>
+      <form action=""></form>
     </div>
   )
 }
