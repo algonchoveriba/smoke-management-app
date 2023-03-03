@@ -34,50 +34,50 @@ export interface Database {
   }
   public: {
     Tables: {
-      counters: {
+      brands: {
         Row: {
-          created_at: string | null
-          id: number
-          kind: string | null
-          number: number | null
-          u_id: string
+          created_at: string
+          id: string
+          name: string
+          price: number
+          user_id: string
         }
         Insert: {
-          created_at?: string | null
-          id?: number
-          kind?: string | null
-          number?: number | null
-          u_id: string
+          created_at?: string
+          id?: string
+          name: string
+          price: number
+          user_id: string
         }
         Update: {
-          created_at?: string | null
-          id?: number
-          kind?: string | null
-          number?: number | null
-          u_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          price?: number
+          user_id?: string
         }
       }
-      kinds: {
+      counters: {
         Row: {
-          created_at: string | null
+          brand_id: string
+          created_at: string
           id: string
-          name: string | null
-          price: number | null
-          u_id: string
+          number: number
+          user_id: string
         }
         Insert: {
-          created_at?: string | null
-          id: string
-          name?: string | null
-          price?: number | null
-          u_id: string
+          brand_id: string
+          created_at?: string
+          id?: string
+          number: number
+          user_id: string
         }
         Update: {
-          created_at?: string | null
+          brand_id?: string
+          created_at?: string
           id?: string
-          name?: string | null
-          price?: number | null
-          u_id?: string
+          number?: number
+          user_id?: string
         }
       }
       profiles: {
@@ -256,3 +256,11 @@ export interface Database {
     }
   }
 }
+export type EditedCounter = Omit<
+  Database['public']['Tables']['counters']['Row'],
+  'created_at' | 'user_id'
+>
+export type EditedBrand = Omit<
+  Database['public']['Tables']['brands']['Row'],
+  'created_at' | 'user_id'
+>
