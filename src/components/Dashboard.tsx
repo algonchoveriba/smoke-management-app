@@ -1,5 +1,8 @@
 import { useQueryClient } from 'react-query'
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowsRightLeftIcon,
+} from '@heroicons/react/24/solid'
 import { CounterForm } from '@/components/CounterForm'
 import { CounterList } from '@/components/CounterList'
 import { BrandForm } from '@/components/BrandForm'
@@ -21,23 +24,27 @@ export const Dashboard = ({ session }: { session: Session }) => {
   return (
     <div className="flex snap-x overflow-x-auto">
       <div className="snap-center">
-        <div className="mx-2 h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 p-4 shadow-lg backdrop-blur-lg">
+        <div className="mx-14 h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 p-4 shadow-lg backdrop-blur-lg">
           <span className="text-xl font-extrabold">本数登録</span>
           <CounterForm />
           <CounterList />
         </div>
       </div>
-
+      <span className="my-auto">
+        <ArrowsRightLeftIcon className="h-10 w-10 text-gray-300" />
+      </span>
       <div className="snap-center">
-        <div className="mx-2 h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 p-4 shadow-lg backdrop-blur-lg">
+        <div className="mx-14 h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/30 p-4 shadow-lg backdrop-blur-lg">
           <span className="text-xl font-extrabold">銘柄登録</span>
           <BrandForm />
           <BrandList />
         </div>
       </div>
-
+      <span className="my-auto">
+        <ArrowsRightLeftIcon className="h-10 w-10 text-gray-300" />
+      </span>
       <div className="snap-center">
-        <div className="mx-2">
+        <div className="mx-14">
           <Account session={session} />
         </div>
       </div>
