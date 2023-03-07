@@ -20,7 +20,7 @@ export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
   console.log(CounterItem)
 
   return (
-    <li className="my-3 text-lg font-extrabold">
+    <li className="my-3 text-lg font-medium">
       <span>{number}本</span>
       {user?.id === user_id && editedBrand.id === editedCounter.brands_id ? (
         <span>/{name}</span>
@@ -28,9 +28,9 @@ export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
         ''
       )}
       {user?.id === user_id && (
-        <div className="float-right ml-20 flex">
+        <div className="float-right m-2 flex">
           <PencilSquareIcon
-            className="mx-1 h-5 w-5 cursor-pointer text-blue-500"
+            className="mx-1 h-5 w-5 cursor-pointer text-blue-700"
             onClick={() => {
               update({
                 id: id,
@@ -41,7 +41,7 @@ export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
             }}
           />
           <TrashIcon
-            className="h-5 w-5 cursor-pointer text-blue-500"
+            className="h-5 w-5 cursor-pointer text-blue-700"
             onClick={() => {
               deleteCounterMutation.mutate(id)
             }}

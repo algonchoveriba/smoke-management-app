@@ -9,7 +9,7 @@ export const AuthUI = () => {
   return (
     <>
       {!session ? (
-        <div className="h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/10 p-4 shadow-lg backdrop-blur-lg">
+        <div className="mx-4 my-10 h-96 w-80 rounded-md border border-gray-200/30 bg-gray-200/10 p-4 shadow-lg backdrop-blur-lg">
           <SupabaseAuthUI
             supabaseClient={supabase}
             appearance={{

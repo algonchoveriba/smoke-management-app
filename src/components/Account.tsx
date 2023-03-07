@@ -119,7 +119,7 @@ export const Account = ({ session }: { session: Session }) => {
         </div>
       </div>
 
-      <div className="mx-auto">
+      <div className="">
         <button
           className="my-2 w-32 rounded-full bg-indigo-500/80 px-2 text-gray-100"
           onClick={() => updateProfile({ username, avatar_url })}
@@ -130,7 +130,7 @@ export const Account = ({ session }: { session: Session }) => {
 
       <div>
         <button
-          className="my-2 w-28 rounded-full bg-gray-500/80 px-2 text-gray-100"
+          className="my-2 w-28 rounded-full bg-indigo-700/80 px-2 text-gray-100"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
