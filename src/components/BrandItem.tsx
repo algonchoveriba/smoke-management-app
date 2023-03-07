@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import useStore from '@/store'
 import { useMutateBrand } from '@/hooks/useMutateBrand'
@@ -18,7 +18,8 @@ export const BrandItem: FC<Omit<Brand, 'created_at'>> = ({
 
   return (
     <li className="my-3 text-lg font-extrabold">
-      <span>{name}</span>
+      <span>¥{price}</span>
+      <span>/{name}</span>
       {user?.id === user_id && (
         <div className="float-right ml-20 flex">
           <PencilSquareIcon

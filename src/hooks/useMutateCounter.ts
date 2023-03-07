@@ -32,7 +32,7 @@ export const useMutateCounter = () => {
     async (counter: EditedCounter) => {
       const { data, error } = await supabase
         .from('counters')
-        .update({ number: counter.number, brand_id: counter.brand_id })
+        .update({ number: counter.number, brand_id: counter.brands_id })
         .eq('id', counter.id)
       if (error) throw new Error(error.message)
       return data

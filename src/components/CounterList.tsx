@@ -14,7 +14,9 @@ export const CounterList: FC = () => {
           key={counter.id}
           id={counter.id}
           number={counter.number}
-          brand_id={counter.brand_id}
+          name={counter.name}
+          brands_id={counter.brands_id}
+          user_id={counter.user_id}
         />
       ))}
     </ul>

@@ -10,18 +10,19 @@ type State = {
   resetEditedBrand: () => void
 }
 const useStore = create<State>((set) => ({
-  editedCounter: { id: '', number: 0, brand_id: '' },
-  editedBrand: { id: '', name: '', price: 0 },
+  editedCounter: { id: '', number: 1, brands_id: '', name: '' },
+  editedBrand: { id: '', name: '', price: 30 },
   updateEditedCounter: (payload) =>
     set({
       editedCounter: {
         id: payload.id,
         number: payload.number,
-        brand_id: payload.brand_id,
+        brands_id: payload.brands_id,
+        name: payload.name,
       },
     }),
   resetEditedCounter: () =>
-    set({ editedCounter: { id: '', number: 0, brand_id: '' } }),
+    set({ editedCounter: { id: '', number: 1, brands_id: '', name: '' } }),
   updateEditedBrand: (payload) =>
     set({
       editedBrand: {
@@ -30,6 +31,6 @@ const useStore = create<State>((set) => ({
         price: payload.price,
       },
     }),
-  resetEditedBrand: () => set({ editedBrand: { id: '', name: '', price: 0 } }),
+  resetEditedBrand: () => set({ editedBrand: { id: '', name: '', price: 30 } }),
 }))
 export default useStore

@@ -102,7 +102,16 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      counters_view: {
+        Row: {
+          brands_id: string
+          created_at: string
+          id: string
+          name: string
+          number: number
+          user_id: string
+        }
+      }
     }
     Functions: {
       [_ in never]: never
@@ -118,7 +127,10 @@ export interface Database {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null
+          avif_autodetection: boolean | null
           created_at: string | null
+          file_size_limit: number | null
           id: string
           name: string
           owner: string | null
@@ -126,7 +138,10 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id: string
           name: string
           owner?: string | null
@@ -134,7 +149,10 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id?: string
           name?: string
           owner?: string | null
@@ -257,7 +275,7 @@ export interface Database {
   }
 }
 export type EditedCounter = Omit<
-  Database['public']['Tables']['counters']['Row'],
+  Database['public']['Views']['counters_view']['Row'],
   'created_at' | 'user_id'
 >
 export type EditedBrand = Omit<

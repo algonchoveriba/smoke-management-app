@@ -18,6 +18,7 @@ export const Account = ({ session }: { session: Session }) => {
   useEffect(() => {
     getProfile()
     console.log('更新')
+    console.log(session)
   }, [session])
 
   async function getProfile() {

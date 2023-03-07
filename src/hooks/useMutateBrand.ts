@@ -16,11 +16,13 @@ export const useMutateBrand = () => {
     },
     {
       onSuccess: (res) => {
-        const previousBrands = queryClient.getQueryData<Brand[]>('brands')
-        if (previousBrands) {
-          queryClient.setQueryData('brands', [...previousBrands, res![0]])
+        if (res !== null) {
+          const previousBrands = queryClient.getQueryData<Brand[]>('brands')
+          if (previousBrands) {
+            queryClient.setQueryData('brands', [...previousBrands, res[0]])
+          }
+          reset()
         }
-        reset()
       },
       onError: (err: any) => {
         alert(err.message)
@@ -39,16 +41,18 @@ export const useMutateBrand = () => {
     },
     {
       onSuccess: (res, variables) => {
-        const previousBrands = queryClient.getQueryData<Brand[]>('brands')
-        if (previousBrands) {
-          queryClient.setQueryData(
-            'brands',
-            previousBrands.map((brand) =>
-              brand.id === variables.id ? res![0] : brand
+        if (res !== null) {
+          const previousBrands = queryClient.getQueryData<Brand[]>('brands')
+          if (previousBrands) {
+            queryClient.setQueryData(
+              'brands',
+              previousBrands.map((brand) =>
+                brand.id === variables.id ? res[0] : brand
+              )
             )
-          )
+          }
+          reset()
         }
-        reset()
       },
       onError: (err: any) => {
         alert(err.message)

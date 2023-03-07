@@ -2,10 +2,12 @@ import { FormEvent, FC } from 'react'
 import useStore from '@/store'
 import { useMutateBrand } from '@/hooks/useMutateBrand'
 import { useUser } from '@supabase/auth-helpers-react'
+import { useQuery } from 'react-query'
 
 export const BrandForm: FC = () => {
   const user = useUser()
   const { editedBrand } = useStore()
+  const {} = useQuery('brands')
   const update = useStore((state) => state.updateEditedBrand)
   const { createBrandMutation, updateBrandMutation } = useMutateBrand()
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
