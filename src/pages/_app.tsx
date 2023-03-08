@@ -4,6 +4,7 @@ import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import type { AppProps } from 'next/app'
 import '@/styles/globals.css'
+import { Database } from 'schema'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +21,7 @@ function App({
 }: AppProps<{
   initialSession: Session
 }>) {
-  const [supabase] = useState(() => createBrowserSupabaseClient())
+  const [supabase] = useState(() => createBrowserSupabaseClient<Database>())
 
   return (
     <SessionContextProvider

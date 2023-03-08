@@ -16,13 +16,12 @@ export const useMutateBrand = () => {
     },
     {
       onSuccess: (res) => {
-        if (res !== null) {
-          const previousBrands = queryClient.getQueryData<Brand[]>('brands')
-          if (previousBrands) {
-            queryClient.setQueryData('brands', [...previousBrands, res[0]])
-          }
-          reset()
+        const previousBrands = queryClient.getQueryData<Brand[]>('brands')
+        if (previousBrands) {
+          console.log(`res:${res}`)
+          queryClient.setQueryData('brands', [...previousBrands, res[0]])
         }
+        reset()
       },
       onError: (err: any) => {
         alert(err.message)
