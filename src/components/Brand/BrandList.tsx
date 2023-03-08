@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useQueryBrands } from '@/hooks/useQueryBrands'
-import { Spinner } from './Spinner'
+import { Spinner } from '../Spinner'
 import { BrandItem } from './BrandItem'
 
 export const BrandList: FC = () => {

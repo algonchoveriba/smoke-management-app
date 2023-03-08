@@ -17,7 +17,6 @@ export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
   const update = useStore((state) => state.updateEditedCounter)
   const { deleteCounterMutation } = useMutateCounter()
   const { editedBrand, editedCounter } = useStore()
-  console.log(CounterItem)
 
   return (
     <li className="my-3 text-lg font-medium">

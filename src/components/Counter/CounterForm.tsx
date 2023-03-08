@@ -3,11 +3,9 @@ import useStore from '@/store'
 import { useMutateCounter } from '@/hooks/useMutateCounter'
 import { useUser } from '@supabase/auth-helpers-react'
 import { useQueryBrands } from '@/hooks/useQueryBrands'
-import { useRouter } from 'next/router'
 
 export const CounterForm: FC = () => {
   const user = useUser()
-  const router = useRouter()
   const { editedCounter, editedBrand } = useStore()
   const { data: brands } = useQueryBrands()
   const update = useStore((state) => state.updateEditedCounter)

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useQueryCounters } from '@/hooks/useQueryCounters'
-import { Spinner } from './Spinner'
+import { Spinner } from '../Spinner'
 import { CounterItem } from './CounterItem'
 
 export const CounterList: FC = () => {

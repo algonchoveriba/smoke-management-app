@@ -3,12 +3,12 @@ import {
   ArrowLeftOnRectangleIcon,
   ArrowsRightLeftIcon,
 } from '@heroicons/react/24/solid'
-import { CounterForm } from '@/components/CounterForm'
-import { CounterList } from '@/components/CounterList'
-import { BrandForm } from '@/components/BrandForm'
-import { BrandList } from '@/components/BrandList'
+import { CounterForm } from '@/components/Counter/CounterForm'
+import { CounterList } from '@/components/Counter/CounterList'
+import { BrandForm } from '@/components/Brand/BrandForm'
+import { BrandList } from '@/components/Brand/BrandList'
 import { Session } from '@supabase/supabase-js'
-import { Account } from './Account'
+import { Account } from './Account/Account'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { Database } from 'schema'
 
