@@ -10,7 +10,7 @@ export const BrandForm: FC = () => {
   const { createBrandMutation, updateBrandMutation } = useMutateBrand()
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (editedBrand.id === '' && user)
+    if (editedBrand.brand_id === '' && user)
       createBrandMutation.mutate({
         name: editedBrand.name,
         price: editedBrand.price,
@@ -18,7 +18,7 @@ export const BrandForm: FC = () => {
       })
     else {
       updateBrandMutation.mutate({
-        id: editedBrand.id,
+        brand_id: editedBrand.brand_id,
         name: editedBrand.name,
         price: editedBrand.price,
       })
@@ -47,7 +47,7 @@ export const BrandForm: FC = () => {
         type="submit"
         className="ml-2 rounded bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700"
       >
-        {editedBrand.id ? 'Update' : 'Create'}
+        {editedBrand.brand_id ? 'Update' : 'Create'}
       </button>
     </form>
   )

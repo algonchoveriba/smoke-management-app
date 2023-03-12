@@ -1,31 +1,34 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import useStore from '@/store'
 import { useMutateCounter } from '@/hooks/useMutateCounter'
-import { Database } from 'schema'
 import { useUser } from '@supabase/auth-helpers-react'
-type Counter = Database['public']['Views']['counters_view']['Row']
+import { Database } from 'schema'
+import { useQueryBrands } from '@/hooks/useQueryBrands'
+type Counter = Database['public']['Tables']['counters']['Row']
 
 export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
   id,
   number,
-  name,
+  brand_id,
   user_id,
-  brands_id,
 }) => {
   const user = useUser()
+  const { data: brands } = useQueryBrands()
+  let name
+  brands?.forEach((brand) => {
+    if (brand.brand_id === brand_id) {
+      name = brand.name
+    }
+  })
+
   const update = useStore((state) => state.updateEditedCounter)
   const { deleteCounterMutation } = useMutateCounter()
-  const { editedBrand, editedCounter } = useStore()
 
   return (
     <li className="my-3 text-lg font-medium">
       <span>{number}本</span>
-      {user?.id === user_id && editedBrand.id === editedCounter.brands_id ? (
-        <span>/{name}</span>
-      ) : (
-        ''
-      )}
+      <span>/{name}</span>
       {user?.id === user_id && (
         <div className="float-right m-2 flex">
           <PencilSquareIcon
@@ -34,8 +37,7 @@ export const CounterItem: FC<Omit<Counter, 'created_at'>> = ({
               update({
                 id: id,
                 number: number,
-                brands_id: brands_id,
-                name: name,
+                brand_id: brand_id,
               })
             }}
           />

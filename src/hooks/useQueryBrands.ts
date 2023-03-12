@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { supabase } from 'utils/supabase'
 import { Database } from 'schema'
 type Brand = Database['public']['Tables']['brands']['Row']
@@ -16,7 +16,7 @@ export const useQueryBrands = () => {
     return data
   }
   return useQuery<Brand[], Error>({
-    queryKey: 'brands',
+    queryKey: ['brands'],
     queryFn: getBrands,
     staleTime: 0, //[ms]
     refetchOnWindowFocus: true,

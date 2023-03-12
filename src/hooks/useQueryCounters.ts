@@ -1,24 +1,22 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { supabase } from 'utils/supabase'
 import { Database } from 'schema'
-type Counter = Database['public']['Views']['counters_view']['Row']
+type Counter = Database['public']['Tables']['counters']['Row']
 
 export const useQueryCounters = () => {
   const getCounters = async () => {
     const { data, error } = await supabase
-      .from('counters_view')
+      .from('counters')
       .select('*')
       .order('created_at', { ascending: true })
 
     if (error) {
-      throw new Error(error.message)
+      throw new Error(`${error.message}: ${error.details}`)
     }
-    console.table(data)
-    console.log(data)
     return data
   }
   return useQuery<Counter[], Error>({
-    queryKey: 'counters',
+    queryKey: ['counters'],
     queryFn: getCounters,
     staleTime: Infinity,
   })

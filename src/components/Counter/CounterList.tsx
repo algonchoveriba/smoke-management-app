@@ -7,15 +7,15 @@ export const CounterList: FC = () => {
   const { data: counters, status } = useQueryCounters()
   if (status === 'loading') return <Spinner />
   if (status === 'error') return <p>{'Error'}</p>
+
   return (
     <ul>
-      {counters?.map((counter) => (
+      {counters.map((counter) => (
         <CounterItem
           key={counter.id}
           id={counter.id}
           number={counter.number}
-          name={counter.name}
-          brands_id={counter.brands_id}
+          brand_id={counter.brand_id}
           user_id={counter.user_id}
         />
       ))}

@@ -1,4 +1,4 @@
-import { useQueryClient, useMutation } from 'react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import useStore from '@/store'
 import { supabase } from 'utils/supabase'
 import { Database, EditedBrand } from 'schema'
@@ -9,17 +9,19 @@ export const useMutateBrand = () => {
   const reset = useStore((state) => state.resetEditedBrand)
 
   const createBrandMutation = useMutation(
-    async (brand: Omit<Brand, 'id' | 'created_at'>) => {
-      const { data, error } = await supabase.from('brands').insert(brand)
+    async (brand: Omit<Brand, 'brand_id' | 'created_at'>) => {
+      const { data, error } = await supabase
+        .from('brands')
+        .insert(brand)
+        .select('*')
       if (error) throw new Error(error.message)
       return data
     },
     {
       onSuccess: (res) => {
-        const previousBrands = queryClient.getQueryData<Brand[]>('brands')
+        const previousBrands = queryClient.getQueryData<Brand[]>(['brands'])
         if (previousBrands) {
-          console.log(`res:${res}`)
-          queryClient.setQueryData('brands', [...previousBrands, res[0]])
+          queryClient.setQueryData(['brands'], [...previousBrands, res[0]])
         }
         reset()
       },
@@ -34,24 +36,23 @@ export const useMutateBrand = () => {
       const { data, error } = await supabase
         .from('brands')
         .update({ name: brand.name, price: brand.price })
-        .eq('id', brand.id)
+        .eq('brand_id', brand.brand_id)
+        .select('*')
       if (error) throw new Error(error.message)
       return data
     },
     {
       onSuccess: (res, variables) => {
-        if (res !== null) {
-          const previousBrands = queryClient.getQueryData<Brand[]>('brands')
-          if (previousBrands) {
-            queryClient.setQueryData(
-              'brands',
-              previousBrands.map((brand) =>
-                brand.id === variables.id ? res[0] : brand
-              )
+        const previousBrands = queryClient.getQueryData<Brand[]>(['brands'])
+        if (previousBrands) {
+          queryClient.setQueryData(
+            ['brands'],
+            previousBrands.map((brand) =>
+              brand.brand_id === variables.brand_id ? res[0] : brand
             )
-          }
-          reset()
+          )
         }
+        reset()
       },
       onError: (err: any) => {
         alert(err.message)
@@ -60,21 +61,21 @@ export const useMutateBrand = () => {
     }
   )
   const deleteBrandMutation = useMutation(
-    async (id: string) => {
+    async (brand_id: string) => {
       const { data, error } = await supabase
         .from('brands')
         .delete()
-        .eq('id', id)
+        .eq('brand_id', brand_id)
       if (error) throw new Error(error.message)
       return data
     },
     {
       onSuccess: (_, variables) => {
-        const previousBrands = queryClient.getQueryData<Brand[]>('brands')
+        const previousBrands = queryClient.getQueryData<Brand[]>(['brands'])
         if (previousBrands) {
           queryClient.setQueryData(
-            'brands',
-            previousBrands.filter((brand) => brand.id !== variables)
+            ['brands'],
+            previousBrands.filter((brand) => brand.brand_id !== variables)
           )
         }
         reset()

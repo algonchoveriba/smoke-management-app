@@ -1,4 +1,4 @@
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   ArrowLeftOnRectangleIcon,
   ArrowsRightLeftIcon,
@@ -17,8 +17,8 @@ export const Dashboard = ({ session }: { session: Session }) => {
   const queryClient = useQueryClient()
   const signOut = () => {
     supabase.auth.signOut()
-    queryClient.removeQueries('counters')
-    queryClient.removeQueries('brands')
+    queryClient.removeQueries(['counters'])
+    queryClient.removeQueries(['brands'])
   }
 
   return (

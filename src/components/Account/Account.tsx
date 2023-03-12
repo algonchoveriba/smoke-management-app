@@ -17,16 +17,12 @@ export const Account = ({ session }: { session: Session }) => {
 
   useEffect(() => {
     getProfile()
-    console.log('更新')
-    console.log(session)
   }, [session])
 
   async function getProfile() {
     try {
       setLoading(true)
       if (!user) throw new Error('No user')
-
-      console.log('get profile ...')
 
       let { data, error, status } = await supabase
         .from('profiles')
@@ -59,8 +55,6 @@ export const Account = ({ session }: { session: Session }) => {
     try {
       setLoading(true)
       if (!user) throw new Error('No user')
-
-      console.log('profile update ...')
 
       const updates = {
         id: user.id,

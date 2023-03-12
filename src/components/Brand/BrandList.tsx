@@ -11,8 +11,8 @@ export const BrandList: FC = () => {
     <ul className="my-2">
       {brands?.map((brand) => (
         <BrandItem
-          key={brand.id}
-          id={brand.id}
+          key={brand.brand_id}
+          brand_id={brand.brand_id}
           name={brand.name}
           price={brand.price}
           user_id={brand.user_id}

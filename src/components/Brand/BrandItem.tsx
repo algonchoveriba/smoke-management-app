@@ -7,7 +7,7 @@ import { Database } from 'schema'
 type Brand = Database['public']['Tables']['brands']['Row']
 
 export const BrandItem: FC<Omit<Brand, 'created_at'>> = ({
-  id,
+  brand_id,
   name,
   price,
   user_id,
@@ -26,7 +26,7 @@ export const BrandItem: FC<Omit<Brand, 'created_at'>> = ({
             className="mx-1 h-5 w-5 cursor-pointer text-blue-700"
             onClick={() => {
               update({
-                id: id,
+                brand_id: brand_id,
                 name: name,
                 price: price,
               })
@@ -35,7 +35,7 @@ export const BrandItem: FC<Omit<Brand, 'created_at'>> = ({
           <TrashIcon
             className="h-5 w-5 cursor-pointer text-blue-700"
             onClick={() => {
-              deleteBrandMutation.mutate(id)
+              deleteBrandMutation.mutate(brand_id)
             }}
           />
         </div>

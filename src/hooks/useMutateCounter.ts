@@ -1,4 +1,4 @@
-import { useQueryClient, useMutation } from 'react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
 import useStore from '@/store'
 import { supabase } from 'utils/supabase'
 import { Database, EditedCounter } from 'schema'
@@ -10,15 +10,20 @@ export const useMutateCounter = () => {
 
   const createCounterMutation = useMutation(
     async (counter: Omit<Counter, 'id' | 'created_at'>) => {
-      const { data, error } = await supabase.from('counters').insert(counter)
+      const { data, error } = await supabase
+        .from('counters')
+        .insert(counter)
+        .select('*')
       if (error) throw new Error(error.message)
       return data
     },
     {
       onSuccess: (res) => {
-        const previousCounters = queryClient.getQueryData<Counter[]>('counters')
+        const previousCounters = queryClient.getQueryData<Counter[]>([
+          'counters',
+        ])
         if (previousCounters) {
-          queryClient.setQueryData('counters', [...previousCounters, res![0]])
+          queryClient.setQueryData(['counters'], [...previousCounters, res[0]])
         }
         reset()
       },
@@ -32,19 +37,22 @@ export const useMutateCounter = () => {
     async (counter: EditedCounter) => {
       const { data, error } = await supabase
         .from('counters')
-        .update({ number: counter.number, brand_id: counter.brands_id })
+        .update({ number: counter.number, brand_id: counter.brand_id })
         .eq('id', counter.id)
+        .select('*')
       if (error) throw new Error(error.message)
       return data
     },
     {
       onSuccess: (res, variables) => {
-        const previousCounters = queryClient.getQueryData<Counter[]>('counters')
+        const previousCounters = queryClient.getQueryData<Counter[]>([
+          'counters',
+        ])
         if (previousCounters) {
           queryClient.setQueryData(
-            'counters',
+            ['counters'],
             previousCounters.map((counter) =>
-              counter.id === variables.id ? res![0] : counter
+              counter.id === variables.id ? res[0] : counter
             )
           )
         }
@@ -67,10 +75,12 @@ export const useMutateCounter = () => {
     },
     {
       onSuccess: (_, variables) => {
-        const previousCounters = queryClient.getQueryData<Counter[]>('counters')
+        const previousCounters = queryClient.getQueryData<Counter[]>([
+          'counters',
+        ])
         if (previousCounters) {
           queryClient.setQueryData(
-            'counters',
+            ['counters'],
             previousCounters.filter((counter) => counter.id !== variables)
           )
         }

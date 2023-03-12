@@ -5,37 +5,37 @@ import { EditedCounter, EditedBrand } from 'schema'
 type State = {
   editedCounter: EditedCounter
   editedBrand: EditedBrand
-  updateEditedCounter: (payload: EditedCounter) => void
-  updateEditedBrand: (payload: EditedBrand) => void
+  updateEditedCounter: (payloadCounter: EditedCounter) => void
+  updateEditedBrand: (payloadBrand: EditedBrand) => void
   resetEditedCounter: () => void
   resetEditedBrand: () => void
 }
+
 const useStore = create<State>()(
   devtools((set) => ({
-    editedCounter: { id: '', number: 1, brands_id: '', name: '' },
-    updateEditedCounter: (payload) =>
+    editedCounter: { id: '', number: 1, brand_id: '' },
+    updateEditedCounter: (payloadCounter) =>
       set({
         editedCounter: {
-          id: payload.id,
-          number: payload.number,
-          brands_id: payload.brands_id,
-          name: payload.name,
+          id: payloadCounter.id,
+          number: payloadCounter.number,
+          brand_id: payloadCounter.brand_id,
         },
       }),
     resetEditedCounter: () =>
-      set({ editedCounter: { id: '', number: 1, brands_id: '', name: '' } }),
+      set({ editedCounter: { id: '', number: 1, brand_id: '' } }),
 
-    editedBrand: { id: '', name: '', price: 30 },
-    updateEditedBrand: (payload) =>
+    editedBrand: { brand_id: '', name: '', price: 30 },
+    updateEditedBrand: (payloadBrand) =>
       set({
         editedBrand: {
-          id: payload.id,
-          name: payload.name,
-          price: payload.price,
+          brand_id: payloadBrand.brand_id,
+          name: payloadBrand.name,
+          price: payloadBrand.price,
         },
       }),
     resetEditedBrand: () =>
-      set({ editedBrand: { id: '', name: '', price: 30 } }),
+      set({ editedBrand: { brand_id: '', name: '', price: 30 } }),
   }))
 )
 export default useStore

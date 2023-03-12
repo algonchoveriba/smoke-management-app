@@ -1,4 +1,4 @@
-import { FormEvent, FC } from 'react'
+import { FormEvent, FC, useEffect } from 'react'
 import useStore from '@/store'
 import { useMutateCounter } from '@/hooks/useMutateCounter'
 import { useUser } from '@supabase/auth-helpers-react'
@@ -6,7 +6,7 @@ import { useQueryBrands } from '@/hooks/useQueryBrands'
 
 export const CounterForm: FC = () => {
   const user = useUser()
-  const { editedCounter, editedBrand } = useStore()
+  const { editedCounter } = useStore()
   const { data: brands } = useQueryBrands()
   const update = useStore((state) => state.updateEditedCounter)
   const { createCounterMutation, updateCounterMutation } = useMutateCounter()
@@ -16,17 +16,22 @@ export const CounterForm: FC = () => {
       createCounterMutation.mutate({
         number: editedCounter.number,
         user_id: user.id,
-        brand_id: editedBrand.id,
+        brand_id: editedCounter.brand_id,
       })
     else {
       updateCounterMutation.mutate({
         id: editedCounter.id,
         number: editedCounter.number,
-        brands_id: editedCounter.brands_id,
-        name: editedCounter.name,
+        brand_id: editedCounter.brand_id,
       })
     }
   }
+
+  useEffect(() => {
+    console.log('before:', editedCounter)
+    if (brands) editedCounter.brand_id = brands[0].brand_id
+    console.log('after:', editedCounter)
+  }, [brands])
 
   return (
     <form onSubmit={submitHandler}>
@@ -41,12 +46,14 @@ export const CounterForm: FC = () => {
       />
 
       <select
-        name="counters-brand_name"
-        id="counters-brand_name"
+        name="counters-brand"
+        id="counters-brand"
         className="my-2 rounded border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+        value={editedCounter.brand_id}
+        onChange={(e) => update({ ...editedCounter, brand_id: e.target.value })}
       >
-        {brands?.map((brand: any) => (
-          <option key={brand.id} value={brand.id}>
+        {brands?.map((brand) => (
+          <option key={brand.brand_id} value={brand.brand_id}>
             {brand.name}
           </option>
         ))}

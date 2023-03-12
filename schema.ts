@@ -36,22 +36,22 @@ export interface Database {
     Tables: {
       brands: {
         Row: {
+          brand_id: string
           created_at: string
-          id: string
           name: string
           price: number
           user_id: string
         }
         Insert: {
+          brand_id?: string
           created_at?: string
-          id?: string
           name: string
           price: number
           user_id: string
         }
         Update: {
+          brand_id?: string
           created_at?: string
-          id?: string
           name?: string
           price?: number
           user_id?: string
@@ -104,12 +104,12 @@ export interface Database {
     Views: {
       counters_view: {
         Row: {
-          brands_id: string
-          created_at: string
-          id: string
-          name: string
-          number: number
-          user_id: string
+          brand_id: string | null
+          created_at: string | null
+          id: string | null
+          name: string | null
+          number: number | null
+          user_id: string | null
         }
       }
     }
@@ -220,6 +220,15 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string
+          name: string
+          owner: string
+          metadata: Json
+        }
+        Returns: undefined
+      }
       extension: {
         Args: {
           name: string
@@ -274,8 +283,15 @@ export interface Database {
     }
   }
 }
+export interface CounterItemType {
+  id: string | null
+  number: number | null
+  brand_id: string | null
+  user_id: string | null
+  name: string | null
+}
 export type EditedCounter = Omit<
-  Database['public']['Views']['counters_view']['Row'],
+  Database['public']['Tables']['counters']['Row'],
   'created_at' | 'user_id'
 >
 export type EditedBrand = Omit<
