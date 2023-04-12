@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { EditedCounter, EditedBrand } from 'schema'
+import { useQueryBrands } from './hooks/useQueryBrands'
 
 type State = {
   editedCounter: EditedCounter

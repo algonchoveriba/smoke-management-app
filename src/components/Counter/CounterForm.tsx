@@ -29,9 +29,10 @@ export const CounterForm: FC = () => {
 
   useEffect(() => {
     console.log('before:', editedCounter)
+    console.log('brands', brands)
     if (brands) editedCounter.brand_id = brands[0].brand_id
     console.log('after:', editedCounter)
-  }, [brands])
+  }, [brands, editedCounter])
 
   return (
     <form onSubmit={submitHandler}>
